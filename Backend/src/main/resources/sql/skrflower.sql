@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2019-03-21 14:45:38
+Date: 2019-03-21 15:04:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -59,6 +59,7 @@ CREATE TABLE `guideline_comment` (
   `user_id` int(11) NOT NULL,
   `content` varchar(255) NOT NULL,
   `time` datetime NOT NULL,
+  `guideline_id` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -93,6 +94,7 @@ CREATE TABLE `hotel_comment` (
   `content` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `time` datetime NOT NULL,
+  `hotel_id` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -143,6 +145,7 @@ CREATE TABLE `room_comment` (
   `content` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `time` datetime NOT NULL,
+  `room_id` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -177,6 +180,7 @@ CREATE TABLE `site_comment` (
   `content` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `time` datetime NOT NULL,
+  `site_id` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
