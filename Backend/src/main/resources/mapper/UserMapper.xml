@@ -20,7 +20,7 @@
     </select>
 
     <insert id="addUser" parameterType="user">
-        insert into user(username,passwd,email,gender,age,alive) values (#{username},#{password},#{email},#{gender},#{age},#{alive})
+        insert into user(username,passwd,email,gender,age) values (#{username},#{password},#{email},#{gender},#{age})
     </insert>
 
     <update id="updateUser" parameterType="user">
