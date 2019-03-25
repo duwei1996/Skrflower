@@ -146,6 +146,8 @@
                     <configuration>
                         <port>8081</port>
                         <path>/skrflower/backend</path>
+                        <uriEncoding>utf-8</uriEncoding>
+                        <useBodyEncodingForURI>true</useBodyEncodingForURI>
                     </configuration>
                 </plugin>
             </plugins>
