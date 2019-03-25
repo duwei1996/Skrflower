@@ -3,10 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.skrflower.backend.dao.UserDao">
-    <select id="findById" resultType="user">
+
+    <resultMap id="userMap" type="user">
+        <id property="userId" column="user_id" />
+        <result property="password" column="passwd" />
+    </resultMap>
+
+    <select id="findById" resultMap="userMap">
         select * from user where user_id = #{userId}
     </select>
-    <select id="findByUsername" resultType="user">
+    <select id="findByUsername" resultMap="userMap">
         select * from user where username = #{username}
     </select>
+    <select id="findByNameAndPwd" resultMap="userMap">
+        select * from  user where username=#{username} and passwd=#{password}
+    </select>
+
+    <insert id="addUser" parameterType="user">
+        insert into user(username,passwd,email,gender,age,alive) values (#{username},#{password},#{email},#{gender},#{age},#{alive})
+    </insert>
+
+    <update id="updateUser" parameterType="user">
+        update user
+        <set>
+            <if test="username != null">username=#{username},</if>
+            <if test="password != null">passwd=#{password},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="gender != null">gender=#{gender},</if>
+            <if test="age != null">age=#{age},</if>
+        </set>
+        where user_id = #{userId}
+    </update>
 </mapper>
