@@ -13,14 +13,21 @@ public class User {
     public User() {
     }
 
-    public User(Integer userId, String username, String password, String email, Integer age, String gender, boolean alive) {
-        this.userId = userId;
+    public User(String username, String password, String email, Integer age, String gender, boolean alive) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.age = age;
         this.gender = gender;
         this.alive = alive;
+    }
+
+    public User(String username, String password, String email, Integer age, String gender) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
     }
 
     public Integer getUserId() {
