@@ -5,6 +5,9 @@ import com.skrflower.backend.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class UserService {
 
@@ -17,5 +20,25 @@ public class UserService {
 
     public User findByUsername(String username){
         return userDao.findByUsername(username);
+    }
+
+    public User findByNameAndPwd(String username, String password) {
+        return userDao.findByNameAndPwd(username, password);
+    }
+
+    public boolean isUser(String username,String password){
+        User user = findByNameAndPwd(username, password);
+        if (user == null){
+            return false;
+        }
+        return true;
+    }
+
+    public void addUser(User user){
+        userDao.addUser(user);
+    }
+
+    public void updateUser(User user){
+        userDao.updateUser(user);
     }
 }
