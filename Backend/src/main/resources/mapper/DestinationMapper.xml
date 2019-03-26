@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skrflower.backend.dao.DestinationDao">
+
+    <resultMap id="destMap" type="destination">
+        <id property="destId" column="dest_id" />
+        <result property="destName" column="dest_name" />
+        <result property="categoryId" column="c_id" />
+        <result property="regionNum" column="region_num" />
+    </resultMap>
+    <select id="findById" resultMap="destMap">
+        select * from destination where dest_id = #{destId}
+    </select>
+    <select id="findByDestName" resultMap="destMap">
+        select * from destination where dest_name = #{destName}
+    </select>
+
+    <select id="findByRegion" resultMap="destMap">
+        select * from destination where region_num = #{regionNum}
+    </select>
+
+    <select id="findByCategory" resultMap="destMap">
+        select * from destination d
+        left join dest_category c
+        on d.c_id = c.c_id
+        where c.c_name=#{categoryName}
+    </select>
+
+    <select id="findByTag" resultMap="destMap">
+        select * from destination d
+        left join dest_tag dt
+        on d.dest_id = dt.d_id
+        left join tag t
+        on dt.t_id = t.t_id
+        where t.t_name = #{tagName}
+    </select>
+    <select id="findByTags" resultMap="destMap">
+        select *
+        from (
+             select d_id
+             from (
+                      select t_id
+                      from tag
+                      where t_name in
+                        <foreach collection="list" open="(" close=")" item="tagName" index="index" separator=",">
+                            #{tagName}
+                        </foreach>
+                  )t left join dest_tag dt on t.t_id = dt.t_id
+             group by d_id
+             having count (0)=${list.size}
+         )dest left join destination d on dest.d_id = d.dest_id
+    </select>
+
+</mapper>
