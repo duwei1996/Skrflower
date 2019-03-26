@@ -4,16 +4,15 @@ public class Destination {
 
     private Integer destId;
     private String destName;
-    private String label;
+    private Integer categoryId;
     private Integer regionNum;
 
     public Destination() {
     }
 
-    public Destination(Integer destId, String destName, String label, Integer regionNum) {
-        this.destId = destId;
+    public Destination(String destName, Integer categoryId, Integer regionNum) {
         this.destName = destName;
-        this.label = label;
+        this.categoryId = categoryId;
         this.regionNum = regionNum;
     }
 
@@ -33,12 +32,12 @@ public class Destination {
         this.destName = destName;
     }
 
-    public String getLabel() {
-        return label;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Integer getRegionNum() {
@@ -47,5 +46,10 @@ public class Destination {
 
     public void setRegionNum(Integer regionNum) {
         this.regionNum = regionNum;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + destId + "," + destName + "," + categoryId + "," + regionNum + "]";
     }
 }
