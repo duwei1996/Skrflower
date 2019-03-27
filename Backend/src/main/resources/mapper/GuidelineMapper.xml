@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skrflower.backend.dao.GuidelineDao">
+
+    <resultMap id="guidMap" type="guideline">
+        <id property="guidId" column="g_id" />
+        <result property="guidName" column="g_name" />
+        <result property="userId" column="user_id" />
+        <result property="categoryId" column="c_id" />
+    </resultMap>
+    <select id="findById" resultMap="guidMap">
+        select * from guideline where g_id = #{guidId}
+    </select>
+    <select id="findByGuideName" resultMap="guidMap">
+        select * from guideline where g_name = #{guidName}
+    </select>
+
+    <select id="findByCategory" resultMap="guidMap">
+        select * from guideline g
+        left join guid_category c
+        on g.c_id = c.c_id
+        where c.c_name=#{categoryName}
+    </select>
+
+    <select id="findByTag" resultMap="guidMap">
+        select * from guideline g
+        left join guid_tag gt
+        on g.g_id = gt.g_id
+        left join tag t
+        on gt.t_id = t.t_id
+        where t.t_name = #{tagName}
+    </select>
+
+
+</mapper>
