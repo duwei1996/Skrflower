@@ -4,42 +4,38 @@ import java.util.Date;
 
 public class Guideline {
 
-    private Integer guideId;
-    private String guideName;
+    private Integer guidId;
+    private String guidName;
     private String content;
-    private String label;
     private Date time;
-    private String type;
-
-    private User author;
+    private Integer userId;
+    private Integer categoryId;
 
     public Guideline() {
     }
 
-    public Integer getGuideId() {
-        return guideId;
-    }
-
-    public Guideline(Integer guideId, String guideName, String content, String label, Date time, String type, User author) {
-        this.guideId = guideId;
-        this.guideName = guideName;
+    public Guideline(String guidName, String content, Date time, Integer userId, Integer categoryId) {
+        this.guidName = guidName;
         this.content = content;
-        this.label = label;
         this.time = time;
-        this.type = type;
-        this.author = author;
+        this.userId = userId;
+        this.categoryId = categoryId;
     }
 
-    public void setGuideId(Integer guideId) {
-        this.guideId = guideId;
+    public Integer getGuidId() {
+        return guidId;
     }
 
-    public String getGuideName() {
-        return guideName;
+    public void setGuidId(Integer guidId) {
+        this.guidId = guidId;
     }
 
-    public void setGuideName(String guideName) {
-        this.guideName = guideName;
+    public String getGuidName() {
+        return guidName;
+    }
+
+    public void setGuidName(String guidName) {
+        this.guidName = guidName;
     }
 
     public String getContent() {
@@ -50,14 +46,6 @@ public class Guideline {
         this.content = content;
     }
 
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
     public Date getTime() {
         return time;
     }
@@ -66,19 +54,24 @@ public class Guideline {
         this.time = time;
     }
 
-    public String getType() {
-        return type;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public User getAuthor() {
-        return author;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + guidId + "," + guidName + "," + categoryId + "," + content + "]";
     }
 }
