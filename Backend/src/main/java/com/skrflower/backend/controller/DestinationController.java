@@ -3,10 +3,7 @@ package com.skrflower.backend.controller;
 import com.skrflower.backend.bean.Destination;
 import com.skrflower.backend.service.DestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +28,7 @@ public class DestinationController {
     public Map<String,Object> findByRegion(Integer regionNum){
         Map<String,Object> map = new HashMap<>();
         List<Destination> list = destinationService.findByRegion(regionNum);
-        map.put("destination",list);
+        map.put("destinations",list);
         return map;
     }
 
@@ -44,7 +41,7 @@ public class DestinationController {
     }
 
     @GetMapping("/findByTags")
-    public Map<String,Object> findByTags(List<String> tags){
+    public Map<String,Object> findByTags(@RequestBody List<String> tags){
         Map<String,Object> map = new HashMap<>();
         List<Destination> list = destinationService.findByTags(tags);
         map.put("destinations",list);

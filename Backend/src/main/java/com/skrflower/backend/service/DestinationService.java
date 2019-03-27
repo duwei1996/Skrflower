@@ -30,6 +30,6 @@ public class DestinationService {
     }
 
     public List<Destination> findByTags(List<String> tags){
-        return findByTags(tags);
+        return destinationDao.findByTags(tags);
     }
 }
