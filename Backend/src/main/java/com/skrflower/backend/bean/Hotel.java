@@ -1,23 +1,26 @@
 package com.skrflower.backend.bean;
 
+import java.util.List;
+
 public class Hotel {
 
     private Integer hotelId;
     private String hotelName;
     private double price;
     private String description;
-    private String label;
+    private Integer categoryId;
     private Integer regionNum;
+
+    List<Comment> comments;
 
     public Hotel() {
     }
 
-    public Hotel(Integer hotelId, String hotelName, double price, String description, String label, Integer regionNum) {
-        this.hotelId = hotelId;
+    public Hotel(String hotelName, double price, String description, Integer categoryId, Integer regionNum) {
         this.hotelName = hotelName;
         this.price = price;
         this.description = description;
-        this.label = label;
+        this.categoryId = categoryId;
         this.regionNum = regionNum;
     }
 
@@ -53,12 +56,12 @@ public class Hotel {
         this.description = description;
     }
 
-    public String getLabel() {
-        return label;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Integer getRegionNum() {
@@ -67,5 +70,13 @@ public class Hotel {
 
     public void setRegionNum(Integer regionNum) {
         this.regionNum = regionNum;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -1,24 +1,27 @@
 package com.skrflower.backend.bean;
 
+import java.util.List;
+
 public class Site {
 
     private Integer siteId;
     private String siteName;
     private String description;
     private String info;
-    private String label;
-    private Integer regionNum;
+    private Integer categoryId;
+    private Integer destId;
+
+    private List<Comment> comments;
 
     public Site() {
     }
 
-    public Site(Integer siteId, String siteName, String description, String info, String label, Integer regionNum) {
-        this.siteId = siteId;
+    public Site(String siteName, String description, String info, Integer categoryId, Integer destId) {
         this.siteName = siteName;
         this.description = description;
         this.info = info;
-        this.label = label;
-        this.regionNum = regionNum;
+        this.categoryId = categoryId;
+        this.destId = destId;
     }
 
     public Integer getSiteId() {
@@ -53,19 +56,27 @@ public class Site {
         this.info = info;
     }
 
-    public String getLabel() {
-        return label;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public Integer getRegionNum() {
-        return regionNum;
+    public Integer getDestId() {
+        return destId;
     }
 
-    public void setRegionNum(Integer regionNum) {
-        this.regionNum = regionNum;
+    public void setDestId(Integer destId) {
+        this.destId = destId;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

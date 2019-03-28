@@ -1,6 +1,7 @@
 package com.skrflower.backend.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Guideline {
 
@@ -8,18 +9,20 @@ public class Guideline {
     private String guidName;
     private String content;
     private Date time;
-    private Integer userId;
     private Integer categoryId;
+
+    private User author;
+    private List<Comment> comments;
 
     public Guideline() {
     }
 
-    public Guideline(String guidName, String content, Date time, Integer userId, Integer categoryId) {
+    public Guideline(String guidName, String content, Date time, Integer categoryId, User author) {
         this.guidName = guidName;
         this.content = content;
         this.time = time;
-        this.userId = userId;
         this.categoryId = categoryId;
+        this.author = author;
     }
 
     public Integer getGuidId() {
@@ -54,20 +57,28 @@ public class Guideline {
         this.time = time;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public Integer getCategoryId() {
         return categoryId;
     }
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

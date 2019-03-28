@@ -7,15 +7,18 @@ public class Comment {
     protected Integer commentId;
     protected String content;
     protected Date time;
-    protected User author;
+
+    private Integer otherId;
+
+    private User author;
 
     public Comment() {
     }
 
-    public Comment(Integer commentId, String content, Date time, User author) {
-        this.commentId = commentId;
+    public Comment(String content, Date time, Integer otherId, User author) {
         this.content = content;
         this.time = time;
+        this.otherId = otherId;
         this.author = author;
     }
 
@@ -41,6 +44,14 @@ public class Comment {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Integer getOtherId() {
+        return otherId;
+    }
+
+    public void setOtherId(Integer otherId) {
+        this.otherId = otherId;
     }
 
     public User getAuthor() {
