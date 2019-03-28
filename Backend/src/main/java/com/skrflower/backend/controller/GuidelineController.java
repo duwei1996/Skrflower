@@ -2,7 +2,6 @@ package com.skrflower.backend.controller;
 
 import com.skrflower.backend.bean.Guideline;
 import com.skrflower.backend.service.GuidelineService;
-import com.sun.javafx.fxml.builder.JavaFXFontBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +17,14 @@ public class GuidelineController {
 
     @Autowired
     GuidelineService guidelineService;
+
+    @GetMapping("/findById")
+    public Map<String,Object> findById(Integer id){
+        Map<String, Object> map = new HashMap<>();
+        Guideline guideline = guidelineService.findById(id);
+        map.put("guideline",guideline);
+        return map;
+    }
 
     @GetMapping("/findByName")
     public Map<String,Object> findByName(String name){
