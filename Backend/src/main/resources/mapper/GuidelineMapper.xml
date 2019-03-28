@@ -10,15 +10,39 @@
         <result property="categoryId" column="c_id" />
     </resultMap>
 
+    <select id="findByCategory" resultMap="guidMap">
+        select * from guideline g
+                          left join guid_category c
+                                    on g.c_id = c.c_id
+        where c.c_name=#{categoryName}
+    </select>
+
+    <select id="findByTag" resultMap="guidMap">
+        select * from guideline g
+                          left join guid_tag gt
+                                    on g.g_id = gt.g_id
+                          left join tag t
+                                    on gt.t_id = t.t_id
+        where t.t_name = #{tagName}
+    </select>
+
     <resultMap id="detailMap" type="guideline">
         <id property="guidId" column="g_id" />
         <result property="guidName" column="g_name" />
         <result property="categoryId" column="c_id" />
         <result property="content" column="content" />
         <result property="time" column="time" />
-        <association property="author" column="u_id" javaType="user" resultMap="userMap"/>
-        <collection property="comments" ofType="comment" resultMap="commentMap"/>
+        <association property="author" column="u_id" select="selectAuthor" />
+        <collection property="comments" column="g_id" ofType="guidelineComment" select="selectComment" />
     </resultMap>
+    <select id="findById" resultMap="detailMap">
+        select * from guideline g
+        where g.g_id = #{guidId}
+    </select>
+    <select id="findByGuideName" resultMap="detailMap">
+        select * from guideline
+        where g_name = #{guidName}
+    </select>
 
     <resultMap id="userMap" type="user">
         <id property="userId" column="u_id" />
@@ -28,46 +52,21 @@
         <result property="gender" column="gender" />
         <result property="age" column="age" />
     </resultMap>
+    <select id="selectAuthor" resultMap="userMap">
+        select * from user
+        where u_id = #{u_id}
+    </select>
 
     <resultMap id="commentMap" type="comment">
         <id property="commentId" column="c_id" />
         <result property="content" column="content" />
         <result property="time" column="time" />
         <result property="otherId" column="g_id" />
-        <association property="author" column="u_id" javaType="user" resultMap="userMap"/>
+        <association property="author" column="u_id" select="selectAuthor" />
     </resultMap>
-
-    <select id="findById" resultMap="detailMap">
-        select * from guideline g
-        left join user u
-        on g.u_id = u.u_id
-        left join guideline_comment gc
-        on g.g_id = gc.g_id
-        where g.g_id = #{guidId}
-    </select>
-    <select id="findByGuideName" resultMap="detailMap">
-        select * from guideline g
-        left join user u
-        on g.u_id = u.u_id
-        left join guideline_comment gc
-        on g.g_id = gc.g_id
-        where g.g_name = #{guidName}
-    </select>
-
-    <select id="findByCategory" resultMap="guidMap">
-        select * from guideline g
-        left join guid_category c
-        on g.c_id = c.c_id
-        where c.c_name=#{categoryName}
-    </select>
-
-    <select id="findByTag" resultMap="guidMap">
-        select * from guideline g
-        left join guid_tag gt
-        on g.g_id = gt.g_id
-        left join tag t
-        on gt.t_id = t.t_id
-        where t.t_name = #{tagName}
+    <select id="selectComment" resultMap="commentMap">
+        select * from guideline_comment
+        where g_id = #{g_id}
     </select>
 
 </mapper>
