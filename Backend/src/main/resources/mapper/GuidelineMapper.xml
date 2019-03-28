@@ -7,14 +7,51 @@
     <resultMap id="guidMap" type="guideline">
         <id property="guidId" column="g_id" />
         <result property="guidName" column="g_name" />
-        <result property="userId" column="user_id" />
         <result property="categoryId" column="c_id" />
     </resultMap>
-    <select id="findById" resultMap="guidMap">
-        select * from guideline where g_id = #{guidId}
+
+    <resultMap id="detailMap" type="guideline">
+        <id property="guidId" column="g_id" />
+        <result property="guidName" column="g_name" />
+        <result property="categoryId" column="c_id" />
+        <result property="content" column="content" />
+        <result property="time" column="time" />
+        <association property="author" column="u_id" javaType="user" resultMap="userMap"/>
+        <collection property="comments" ofType="comment" resultMap="commentMap"/>
+    </resultMap>
+
+    <resultMap id="userMap" type="user">
+        <id property="userId" column="u_id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="gender" column="gender" />
+        <result property="age" column="age" />
+    </resultMap>
+
+    <resultMap id="commentMap" type="comment">
+        <id property="commentId" column="c_id" />
+        <result property="content" column="content" />
+        <result property="time" column="time" />
+        <result property="otherId" column="g_id" />
+        <association property="author" column="u_id" javaType="user" resultMap="userMap"/>
+    </resultMap>
+
+    <select id="findById" resultMap="detailMap">
+        select * from guideline g
+        left join user u
+        on g.u_id = u.u_id
+        left join guideline_comment gc
+        on g.g_id = gc.g_id
+        where g.g_id = #{guidId}
     </select>
-    <select id="findByGuideName" resultMap="guidMap">
-        select * from guideline where g_name = #{guidName}
+    <select id="findByGuideName" resultMap="detailMap">
+        select * from guideline g
+        left join user u
+        on g.u_id = u.u_id
+        left join guideline_comment gc
+        on g.g_id = gc.g_id
+        where g.g_name = #{guidName}
     </select>
 
     <select id="findByCategory" resultMap="guidMap">
@@ -32,6 +69,5 @@
         on gt.t_id = t.t_id
         where t.t_name = #{tagName}
     </select>
-
 
 </mapper>

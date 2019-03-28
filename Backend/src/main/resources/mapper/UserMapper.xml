@@ -5,33 +5,32 @@
 <mapper namespace="com.skrflower.backend.dao.UserDao">
 
     <resultMap id="userMap" type="user">
-        <id property="userId" column="user_id" />
-        <result property="password" column="passwd" />
+        <id property="userId" column="u_id" />
     </resultMap>
 
     <select id="findById" resultMap="userMap">
-        select * from user where user_id = #{userId}
+        select * from user where u_id = #{userId}
     </select>
     <select id="findByUsername" resultMap="userMap">
         select * from user where username = #{username}
     </select>
     <select id="findByNameAndPwd" resultMap="userMap">
-        select * from  user where username=#{username} and passwd=#{password}
+        select * from  user where username=#{username} and password=#{password}
     </select>
 
     <insert id="addUser" parameterType="user">
-        insert into user(username,passwd,email,gender,age) values (#{username},#{password},#{email},#{gender},#{age})
+        insert into user(username,password,email,gender,age) values (#{username},#{password},#{email},#{gender},#{age})
     </insert>
 
     <update id="updateUser" parameterType="user">
         update user
         <set>
             <if test="username != null">username=#{username},</if>
-            <if test="password != null">passwd=#{password},</if>
+            <if test="password != null">password=#{password},</if>
             <if test="email != null">email=#{email},</if>
             <if test="gender != null">gender=#{gender},</if>
             <if test="age != null">age=#{age},</if>
         </set>
-        where user_id = #{userId}
+        where u_id = #{userId}
     </update>
 </mapper>
