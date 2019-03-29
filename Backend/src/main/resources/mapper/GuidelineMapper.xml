@@ -33,7 +33,7 @@
         <result property="content" column="content" />
         <result property="time" column="time" />
         <association property="author" column="u_id" select="selectAuthor" />
-        <collection property="comments" column="g_id" ofType="guidelineComment" select="selectComment" />
+        <collection property="comments" column="g_id" ofType="comment" select="selectComment" />
     </resultMap>
     <select id="findById" resultMap="detailMap">
         select * from guideline g
