@@ -3,7 +3,7 @@ package com.skrflower.backend.bean;
 public class Room {
 
     private Integer roomId;
-    private double proice;
+    private double price;
     private Integer capacity;
     private String label;
     private String type;
@@ -12,9 +12,9 @@ public class Room {
     public Room() {
     }
 
-    public Room(Integer roomId, double proice, Integer capacity, String label, String type, Hotel hotel) {
+    public Room(Integer roomId, double price, Integer capacity, String label, String type, Hotel hotel) {
         this.roomId = roomId;
-        this.proice = proice;
+        this.price = price;
         this.capacity = capacity;
         this.label = label;
         this.type = type;
@@ -29,12 +29,12 @@ public class Room {
         this.roomId = roomId;
     }
 
-    public double getProice() {
-        return proice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProice(double proice) {
-        this.proice = proice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public Integer getCapacity() {
