@@ -22,7 +22,7 @@
         on h.h_id = ht.h_id
         left join tag t
         on ht.t_id = t.t_id
-        where t.t_name = #{tagName}
+        where t.t_name=#{tagName}
     </select>
     <select id="findByDest" resultMap="hotelMap">
         select * from hotel h
