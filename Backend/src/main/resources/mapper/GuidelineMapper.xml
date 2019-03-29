@@ -4,28 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.skrflower.backend.dao.GuidelineDao">
 
+    <!-- 查询攻略集合（按分类、按标签）-->
     <resultMap id="guidMap" type="guideline">
         <id property="guidId" column="g_id" />
         <result property="guidName" column="g_name" />
         <result property="categoryId" column="c_id" />
     </resultMap>
-
     <select id="findByCategory" resultMap="guidMap">
         select * from guideline g
-                          left join guid_category c
-                                    on g.c_id = c.c_id
+        left join guid_category c
+        on g.c_id = c.c_id
         where c.c_name=#{categoryName}
     </select>
-
     <select id="findByTag" resultMap="guidMap">
         select * from guideline g
-                          left join guid_tag gt
-                                    on g.g_id = gt.g_id
-                          left join tag t
-                                    on gt.t_id = t.t_id
+        left join guid_tag gt
+        on g.g_id = gt.g_id
+        left join tag t
+        on gt.t_id = t.t_id
         where t.t_name = #{tagName}
     </select>
 
+    <!-- 查询单个攻略（按ID、按名字） -->
     <resultMap id="detailMap" type="guideline">
         <id property="guidId" column="g_id" />
         <result property="guidName" column="g_name" />
@@ -44,6 +44,7 @@
         where g_name = #{guidName}
     </select>
 
+    <!-- 查询作者 -->
     <resultMap id="userMap" type="user">
         <id property="userId" column="u_id" />
         <result property="username" column="username" />
@@ -57,6 +58,7 @@
         where u_id = #{u_id}
     </select>
 
+    <!-- 查询评论 -->
     <resultMap id="commentMap" type="comment">
         <id property="commentId" column="c_id" />
         <result property="content" column="content" />
