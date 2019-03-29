@@ -9,19 +9,20 @@ public class Hotel {
     private double price;
     private String description;
     private Integer categoryId;
-    private Integer regionNum;
+    private Integer destId;
 
     List<Comment> comments;
+    List<Room> rooms;
 
     public Hotel() {
     }
 
-    public Hotel(String hotelName, double price, String description, Integer categoryId, Integer regionNum) {
+    public Hotel(String hotelName, double price, String description, Integer categoryId, Integer destId) {
         this.hotelName = hotelName;
         this.price = price;
         this.description = description;
         this.categoryId = categoryId;
-        this.regionNum = regionNum;
+        this.destId = destId;
     }
 
     public Integer getHotelId() {
@@ -64,12 +65,12 @@ public class Hotel {
         this.categoryId = categoryId;
     }
 
-    public Integer getRegionNum() {
-        return regionNum;
+    public Integer getDestId() {
+        return destId;
     }
 
-    public void setRegionNum(Integer regionNum) {
-        this.regionNum = regionNum;
+    public void setDestId(Integer destId) {
+        this.destId = destId;
     }
 
     public List<Comment> getComments() {
@@ -78,5 +79,13 @@ public class Hotel {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 }
