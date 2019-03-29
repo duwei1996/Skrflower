@@ -151,7 +151,8 @@ CREATE TABLE `hotel` (
   `h_name` varchar(255) NOT NULL,
   `price` double NOT NULL,
   `description` varchar(255) NOT NULL,
-  `region_num` int(11) NOT NULL,
+  `d_id` int(11) NOT NULL,
+  `c_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`h_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
