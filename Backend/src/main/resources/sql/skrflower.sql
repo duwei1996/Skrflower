@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2019-03-28 10:15:10
+Date: 2019-03-29 14:50:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `destination` (
   `c_id` int(11) NOT NULL COMMENT '分类id',
   `region_num` int(11) NOT NULL,
   PRIMARY KEY (`d_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of destination
@@ -34,6 +34,7 @@ INSERT INTO `destination` VALUES ('1', '北京', '1', '1');
 INSERT INTO `destination` VALUES ('2', '上海', '1', '1');
 INSERT INTO `destination` VALUES ('3', '香港', '2', '1');
 INSERT INTO `destination` VALUES ('4', '东京', '3', '2');
+INSERT INTO `destination` VALUES ('5', '武汉', '1', '1');
 
 -- ----------------------------
 -- Table structure for `dest_category`
@@ -83,13 +84,14 @@ CREATE TABLE `guideline` (
   `time` datetime NOT NULL,
   `c_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`g_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guideline
 -- ----------------------------
 INSERT INTO `guideline` VALUES ('1', '1', '你好四川！', '第一个攻略', '2019-03-27 12:17:53', '1');
 INSERT INTO `guideline` VALUES ('2', '1', '你好北京！', '第二个攻略', '2019-03-27 12:57:11', '1');
+INSERT INTO `guideline` VALUES ('3', '2', '你好武汉！', '第三个攻略', '2019-03-28 11:05:10', '1');
 
 -- ----------------------------
 -- Table structure for `guideline_comment`
@@ -102,12 +104,13 @@ CREATE TABLE `guideline_comment` (
   `time` datetime NOT NULL,
   `g_id` int(11) NOT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of guideline_comment
 -- ----------------------------
 INSERT INTO `guideline_comment` VALUES ('1', '2', '我也去过四川', '2019-03-27 18:50:37', '1');
+INSERT INTO `guideline_comment` VALUES ('2', '1', '我在武汉上大学！', '2019-03-28 11:05:44', '3');
 
 -- ----------------------------
 -- Table structure for `guid_category`
@@ -151,14 +154,15 @@ CREATE TABLE `hotel` (
   `h_name` varchar(255) NOT NULL,
   `price` double NOT NULL,
   `description` varchar(255) NOT NULL,
-  `d_id` int(11) NOT NULL,
+  `d_id` int(11) NOT NULL COMMENT '目的地id',
   `c_id` int(11) NOT NULL COMMENT '分类id',
   PRIMARY KEY (`h_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hotel
 -- ----------------------------
+INSERT INTO `hotel` VALUES ('1', '如家酒店', '100', '武汉，如家', '5', '2');
 
 -- ----------------------------
 -- Table structure for `hotel_category`
@@ -168,11 +172,13 @@ CREATE TABLE `hotel_category` (
   `c_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `c_name` varchar(255) NOT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hotel_category
 -- ----------------------------
+INSERT INTO `hotel_category` VALUES ('1', '主题酒店');
+INSERT INTO `hotel_category` VALUES ('2', '特价酒店');
 
 -- ----------------------------
 -- Table structure for `hotel_comment`
@@ -200,11 +206,12 @@ CREATE TABLE `hotel_tag` (
   `t_id` int(11) NOT NULL COMMENT '酒店标签id',
   `h_id` int(11) NOT NULL COMMENT '酒店id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of hotel_tag
 -- ----------------------------
+INSERT INTO `hotel_tag` VALUES ('1', '12', '1');
 
 -- ----------------------------
 -- Table structure for `region`
@@ -313,7 +320,7 @@ CREATE TABLE `tag` (
   `t_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `t_name` varchar(255) NOT NULL,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tag
@@ -329,6 +336,9 @@ INSERT INTO `tag` VALUES ('8', ' 江苏');
 INSERT INTO `tag` VALUES ('9', ' 北京');
 INSERT INTO `tag` VALUES ('10', ' 欧洲');
 INSERT INTO `tag` VALUES ('11', '东南亚');
+INSERT INTO `tag` VALUES ('12', '周末好去处');
+INSERT INTO `tag` VALUES ('13', ' 朝拜历史');
+INSERT INTO `tag` VALUES ('14', '童话小镇');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -343,7 +353,7 @@ CREATE TABLE `user` (
   `gender` varchar(255) NOT NULL,
   `alive` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`u_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -352,3 +362,4 @@ INSERT INTO `user` VALUES ('1', '阿才', '123456', '123456@qq.com', '22', '男'
 INSERT INTO `user` VALUES ('2', '小李', '123', '123@qq.com', '24', '男', '');
 INSERT INTO `user` VALUES ('3', '柳齐', 'bbb', '123@qq.com', '24', '男', '');
 INSERT INTO `user` VALUES ('4', '李桐岩', '123456', '123456@qq.com', '22', '男', '');
+INSERT INTO `user` VALUES ('5', '周俊松', '123456', '123456@qq.com', '22', '男', '');
