@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skrflower.backend.dao.HotelDao">
+
+    <!-- 查询酒店集合（按分类、按标签、按目的地）-->
+    <resultMap id="hotelMap" type="hotel">
+        <id property="hotelId" column="h_id" />
+        <result property="hotelName" column="h_name" />
+        <result property="categoryId" column="c_id" />
+    </resultMap>
+    <select id="findByCategory" resultMap="hotelMap">
+        select * from hotel h
+        left join hotel_category c
+        on h.c_id = c.c_id
+        where c.c_name=#{categoryName}
+    </select>
+    <select id="findByTag" resultMap="hotelMap">
+        select * from hotel h
+        left join hotel_tag ht
+        on h.h_id = ht.h_id
+        left join tag t
+        on ht.t_id = t.t_id
+        where t.t_name = #{tagName}
+    </select>
+    <select id="findByDest" resultMap="hotelMap">
+        select * from hotel h
+        left join destination d
+        on h.d_id = d.d_id
+        where d.d_name = #{destName}
+    </select>
+
+    <!-- 查询单个攻略（按ID、按名字） -->
+    <resultMap id="detailMap" type="hotel">
+        <id property="hotelId" column="h_id" />
+        <result property="hotelName" column="h_name" />
+        <result property="categoryId" column="c_id" />
+        <result property="price" column="price" />
+        <result property="description" column="description" />
+        <collection property="comments" column="h_id" ofType="comment" select="selectComment" />
+        <collection property="rooms" column="h_id" ofType="room" select="selectRoom" />
+    </resultMap>
+    <select id="findById" resultMap="detailMap">
+        select * from hotel
+        where h_id = #{hotelId}
+    </select>
+    <select id="findByName" resultMap="detailMap">
+        select * from hotel
+        where h_name = #{hotelName}
+    </select>
+
+    <!-- 查询评论 -->
+    <resultMap id="commentMap" type="comment">
+        <id property="commentId" column="c_id" />
+        <result property="content" column="content" />
+        <result property="time" column="time" />
+        <result property="otherId" column="h_id" />
+        <association property="author" column="u_id" select="selectAuthor" />
+    </resultMap>
+    <select id="selectComment" resultMap="commentMap">
+        select * from hotel_comment
+        where h_id = #{h_id}
+    </select>
+    <!-- 查询作者 -->
+    <resultMap id="userMap" type="user">
+        <id property="userId" column="u_id" />
+        <result property="username" column="username" />
+        <result property="password" column="password" />
+        <result property="email" column="email" />
+        <result property="gender" column="gender" />
+        <result property="age" column="age" />
+    </resultMap>
+    <select id="selectAuthor" resultMap="userMap">
+        select * from user
+        where u_id = #{u_id}
+    </select>
+
+    <!-- 查询酒店房间 -->
+    <resultMap id="roomMap" type="room">
+        <id column="r_id" property="roomId" />
+        <result property="type" column="type" />
+        <result column="price" property="price" />
+    </resultMap>
+    <select id="selectRoom" resultMap="roomMap">
+        select * from room
+        where h_id = #{hotelId}
+    </select>
+
+</mapper>
