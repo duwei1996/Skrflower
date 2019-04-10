@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin//跨域注解
 @RestController
 @RequestMapping("/destination")
 public class DestinationController {
